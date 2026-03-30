@@ -9,7 +9,7 @@ public class Emp {
    private String password;
    private String name;
    private Short gender;
-   private String Phone;
+   private String phone;
    private Integer job;
    private Integer salary;
    private String image;
@@ -17,4 +17,5 @@ public class Emp {
    private Integer deptId;
    private LocalDateTime createDate;
    private LocalDateTime updateDate;
+   private String deptName;
 }
