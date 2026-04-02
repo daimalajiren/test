@@ -14,11 +14,11 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpMapper empMapper;
     @Override
-    public PageResult<Emp> page(Integer start, Integer pageSize)
+    public PageResult<Emp> page(Integer page, Integer pageSize)
     {
         Long total = empMapper.count();
-        Integer page = (start-1)*pageSize;
-        List<Emp> rows = empMapper.rows(page, pageSize);
+        Integer start = (page-1)*pageSize;
+        List<Emp> rows = empMapper.rows(start, pageSize);
 
 
 
