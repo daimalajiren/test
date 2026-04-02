@@ -1,7 +1,13 @@
 package com.example.pojo;
 
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
 public class EmpExpr {
     private Integer id;
     private Integer empId;
