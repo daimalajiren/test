@@ -3,10 +3,7 @@ package com.example.mapper;
 import com.example.pojo.Emp;
 import com.example.pojo.EmpQueryParam;
 import com.example.pojo.PageResult;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,4 +36,6 @@ public interface EmpMapper {
       //      order by emp.create_time desc")
     //public List<Emp> rows(String name, Integer gender, LocalDate begin, LocalDate end);
         public List<Emp> rows(EmpQueryParam empQueryParam);
+        @Insert("insert into emp(username,name,gender,phone,job,salary,image,entry_date,dept_id,create_time,update_time) values(#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime})")
+        void insert(Emp emp);
 }

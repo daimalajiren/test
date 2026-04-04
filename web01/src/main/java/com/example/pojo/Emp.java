@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +26,5 @@ public class Emp {
    private LocalDateTime createDate;
    private LocalDateTime updateDate;
    private String deptName;
+   private List<EmpExpr> exprList;
 }

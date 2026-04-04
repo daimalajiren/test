@@ -35,4 +35,11 @@ public Result page(EmpQueryParam empQueryParam) {
     PageResult<Emp> pageResult = EmpService.page(empQueryParam);
     return Result.success(pageResult);
 }
+
+@PostMapping
+    public Result save(@RequestBody Emp emp) {
+        log.info("新增员工，数据：{}", emp);
+        EmpService.save(emp);
+        return Result.success();
+    }
 }
