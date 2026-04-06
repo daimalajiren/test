@@ -23,8 +23,8 @@ public class Emp {
    private String image;
    private LocalDate entryDate;
    private Integer deptId;
-   private LocalDateTime createDate;
-   private LocalDateTime updateDate;
+   private LocalDateTime createTime;
+   private LocalDateTime updateTime;
    private String deptName;
    private List<EmpExpr> exprList;
 }

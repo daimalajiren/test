@@ -36,6 +36,7 @@ public interface EmpMapper {
       //      order by emp.create_time desc")
     //public List<Emp> rows(String name, Integer gender, LocalDate begin, LocalDate end);
         public List<Emp> rows(EmpQueryParam empQueryParam);
+        @Options(useGeneratedKeys = true,keyProperty = "id")
         @Insert("insert into emp(username,name,gender,phone,job,salary,image,entry_date,dept_id,create_time,update_time) values(#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime})")
         void insert(Emp emp);
 }
