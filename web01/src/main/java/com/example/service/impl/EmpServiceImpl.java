@@ -72,4 +72,14 @@ public PageResult<Emp> page(EmpQueryParam empQueryParam)
         }
     }
 
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void delete(List<Integer> ids) {
+
+        empMapper.deleteByIds(ids);
+
+
+        empExprMapper.deleteExprByEmpIds(ids);
+    }
+
 }

@@ -12,6 +12,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @RequestMapping("/emps")
@@ -40,6 +42,12 @@ public Result page(EmpQueryParam empQueryParam) {
     public Result save(@RequestBody Emp emp) {
         log.info("新增员工，数据：{}", emp);
         EmpService.save(emp);
+        return Result.success();
+    }
+    @DeleteMapping
+    public Result delete( @RequestParam List< Integer> ids) {
+        log.info("删除员工，ids：{}", ids);
+        EmpService.delete(ids);
         return Result.success();
     }
 }

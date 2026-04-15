@@ -18,12 +18,12 @@ import java.util.UUID;
 
 
 public class AliyunOSSOperator {
-    @Autowired
-    AliyunOSSProperties aliyunOSSProperties;
 
-     String endpoint = aliyunOSSProperties.getEndpoint();
-     String bucketName = aliyunOSSProperties.getBucketName();
-     String region = aliyunOSSProperties.getRegion();
+     AliyunOSSProperties aliyunOSSProperties;
+     public AliyunOSSOperator(AliyunOSSProperties aliyunOSSProperties) {
+        this.aliyunOSSProperties = aliyunOSSProperties;
+    }
+
     private static final long MAX_FILE_SIZE = 100 * 1024 * 1024;
 
     /**
@@ -34,6 +34,9 @@ public class AliyunOSSOperator {
      * @throws Exception 异常
      */
     public String upload(byte[] content, String originalFilename) throws Exception {
+        String endpoint = aliyunOSSProperties.getEndpoint();
+        String bucketName = aliyunOSSProperties.getBucketName();
+        String region = aliyunOSSProperties.getRegion();
         if (content == null || content.length == 0) {
             throw new IllegalArgumentException("文件内容不能为空");
         }
