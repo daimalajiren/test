@@ -3,6 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.EmpMapper">
+
+    <delete id="deleteByIds">
+            delete  from emp where id in
+            <foreach item="id" collection="ids" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+    </delete>
 <select id="rows" resultType="com.example.pojo.Emp">
 <!--    <bind name="likeName" value="'%' + name + '%'"/>-->
     select emp.*,dept.name deptName from emp left join dept on emp.dept_id = dept.id
