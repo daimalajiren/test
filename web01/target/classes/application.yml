@@ -6,13 +6,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: MAxinwei123456
-  mybatis:
-    configuration:
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-      map-underscore-to-camel-case: true
 logging:
   level:
     org.springframework.jdbc.support.JdbcTransactionManager: debug
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 aliyun:
   oss:
     endpoint: https://oss-cn-beijing.aliyuncs.com

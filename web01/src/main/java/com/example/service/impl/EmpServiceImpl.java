@@ -17,6 +17,7 @@ import org.springframework.util.CollectionUtils;
 import java.beans.Transient;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -80,6 +81,34 @@ public PageResult<Emp> page(EmpQueryParam empQueryParam)
 
 
         empExprMapper.deleteExprByEmpIds(ids);
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public Emp showById(Integer id) {
+        Emp emp = empMapper.showById(id);
+        emp.setExprList(empExprMapper.getExprByEmpId(id));
+        return emp;
+
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void update(Emp emp) {
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateById(emp);
+//        员工经历先删后加
+        empExprMapper.deleteExprByEmpIds(Arrays.asList(emp.getId()));
+        List<EmpExpr> exprList = emp.getExprList();
+        if(!CollectionUtils.isEmpty(exprList))
+        {
+            exprList.forEach(expr -> {
+                expr.setEmpId(emp.getId());
+            });
+            empExprMapper.insertBatch(exprList);
+        }
+
+
     }
 
 }

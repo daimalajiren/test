@@ -42,5 +42,9 @@ public interface EmpMapper {
 
         void deleteByIds(List<Integer> ids);
 
+        @Select("select emp.* from emp where id = #{id}")
+        Emp showById(Integer id);
 
+        @Update("update emp set username = #{username},name = #{name},gender = #{gender},phone = #{phone},job = #{job},salary = #{salary},image = #{image},entry_date = #{entryDate},dept_id = #{deptId},update_time = #{updateTime} where id = #{id}")
+        void updateById(Emp emp);
 }

@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import com.example.pojo.EmpExpr;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -12,4 +13,7 @@ public interface EmpExprMapper {
 
 
     void deleteExprByEmpIds(List<Integer> empIds);
+
+
+    List<EmpExpr> getExprByEmpId(Integer empId);
 }

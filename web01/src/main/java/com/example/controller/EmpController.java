@@ -50,4 +50,16 @@ public Result page(EmpQueryParam empQueryParam) {
         EmpService.delete(ids);
         return Result.success();
     }
+    @GetMapping("/{id}")
+    public Result show(@PathVariable Integer id) {
+        log.info("回显员工，数据：{}", id);
+        Emp emp = EmpService.showById(id);
+        return Result.success(emp);
+    }
+    @PutMapping
+    public Result update(@RequestBody Emp emp) {
+    log.info("修改员工，数据：{}", emp);
+    EmpService.update(emp);
+    return Result.success();
+    }
 }
