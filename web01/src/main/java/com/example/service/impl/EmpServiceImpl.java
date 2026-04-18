@@ -2,10 +2,7 @@ package com.example.service.impl;
 
 import com.example.mapper.EmpExprMapper;
 import com.example.mapper.EmpMapper;
-import com.example.pojo.Emp;
-import com.example.pojo.EmpExpr;
-import com.example.pojo.EmpQueryParam;
-import com.example.pojo.PageResult;
+import com.example.pojo.*;
 import com.example.service.EmpService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -109,6 +106,15 @@ public PageResult<Emp> page(EmpQueryParam empQueryParam)
         }
 
 
+    }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+    Emp empDB = empMapper.selectByUsernameAndPassword(emp);
+    if(empDB != null)
+        return new LoginInfo(empDB.getId(), empDB.getUsername(), empDB.getName(), "");
+     else
+        return null;
     }
 
 }

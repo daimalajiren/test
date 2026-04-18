@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.pojo.Emp;
 import com.example.pojo.EmpQueryParam;
+import com.example.pojo.LoginInfo;
 import com.example.pojo.PageResult;
 
 import java.time.LocalDate;
@@ -18,4 +19,6 @@ public interface EmpService {
     Emp showById(Integer id);
 
     void update(Emp emp);
+
+    LoginInfo login(Emp emp);
 }
