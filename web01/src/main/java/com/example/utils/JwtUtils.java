@@ -3,7 +3,6 @@ package com.example.utils;
 
 
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -33,10 +32,9 @@ public class JwtUtils {
      * 解析JWT令牌
      *
      * @param token JWT令牌
-     * @return Claims对象，包含令牌中的数据
      */
-    public static Claims parseJwt(String token) {
-        return Jwts.parser()
+    public static void parseJwt(String token) {
+        Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
