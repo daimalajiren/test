@@ -2,10 +2,12 @@ package com.example.utils;
 
 
 
-
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
 
@@ -13,6 +15,12 @@ public class JwtUtils {
 
     private static final String SECRET_KEY = "MAxinwei123456";
     private static final long EXPIRE = 1000 * 60 * 60 * 24;
+
+    private static SecretKey getSecretKey() {
+        byte[] keyBytes = SECRET_KEY.getBytes(StandardCharsets.UTF_8);
+        return new SecretKeySpec(keyBytes, 0, keyBytes.length, "HmacSHA256");
+    }
+
     /**
      * 生成JWT令牌
      *
@@ -22,9 +30,9 @@ public class JwtUtils {
      */
     public static String generateJwt(Map<String, Object> claims) {
         return Jwts.builder()
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                .addClaims(claims)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE ))
+                .claims(claims)
+                .expiration(new Date(System.currentTimeMillis() + EXPIRE))
+                .signWith(getSecretKey())
                 .compact();
     }
 
@@ -32,11 +40,14 @@ public class JwtUtils {
      * 解析JWT令牌
      *
      * @param token JWT令牌
+     * @return 解析后的Claims
      */
-    public static void parseJwt(String token) {
-        Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody();
+    public static Claims parseJwt(String token) {
+        return Jwts.parser()
+                .verifyWith(getSecretKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 }
+
